@@ -13,7 +13,7 @@ namespace E_Ticaret.Models
         public string Email { get; set; }
         public string Sifre { get; set; }
         public string SifreTekrar { get; set; }
-        public Guid ActiveGuid { get; set; }
+        public Boolean ActiveGuid { get; set; }
         public int TelefonNo { get; set; }
         public string Cinsiyet { get; set; }
         public DateTime DogumTarihi { get; set; }
