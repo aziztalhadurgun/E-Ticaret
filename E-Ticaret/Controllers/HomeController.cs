@@ -81,39 +81,44 @@ namespace E_Ticaret.Controllers
             DatabaseContext db = new DatabaseContext();
             List<Uye> Uye = db.Uyes.ToList();
             Uye uye = new Uye();
-            //uye = Uye.Find(x => x.Email == model.Email);
-
-
-            if (ModelState.IsValid)
+            Uye uye1 = new Uye();
+            uye1 = Uye.Find(x => x.Email == model.Email);
+            if (uye1 != null)
             {
-                if (uye != null)
+                ModelState.AddModelError("mail", "Bu mail zaten kayıtlı");
+                return View("Login");
+            }
+            else
+            {
+                if (ModelState.IsValid)
                 {
-                    if (uye.Email == model.Email)
+                    if (model.Email != null)
+                    {
+                        if (uye.Email != model.Email)
+                        {
+                            uye.Adi = model.Adi;
+                            uye.Soyadi = model.Soyadi;
+                            uye.Email = model.Email;
+                            uye.Sifre = model.Sifre;
+                            uye.SifreTekrar = model.SifreTekrar;
+                            uye.ActiveGuid = false;
+                            uye.TelefonNo = model.TelefonNo;
+                            uye.Cinsiyet = model.Cinsiyet;
+                            uye.DogumTarihi = model.DogumTarihi;
+                            uye.Adres = model.Adres;
+
+                        db.Uyes.Add(uye);
+                        db.SaveChanges();
+
+                        return View("Login");
+                        }
+                    }
+                    else
                     {
                         ModelState.AddModelError("mail", "Bu mail zaten kayıtlı");
                         return View("Login");
                     }
                 }
-                
-                    if (model.Email != null)
-                    {
-                        uye.Adi = model.Adi;
-                        uye.Soyadi = model.Soyadi;
-                        uye.Email = model.Email;
-                        uye.Sifre = model.Sifre;
-                        uye.SifreTekrar = model.SifreTekrar;
-                        uye.ActiveGuid = false;
-                        uye.TelefonNo = model.TelefonNo;
-                        uye.Cinsiyet = model.Cinsiyet;
-                        uye.DogumTarihi = model.DogumTarihi;
-                        uye.Adres = model.Adres;
-
-                    }
-                    db.Uyes.Add(uye);
-                    db.SaveChanges();
-
-                    return View("Login");
-                
             }
             return View(model);
         }
