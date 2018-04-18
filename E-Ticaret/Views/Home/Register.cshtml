@@ -108,13 +108,13 @@
                                 <label class="control-label" for="input_email">E-posta <sup>*</sup></label>
                                 <div class="controls">
                                     @if (Session == null)
-            {
-                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "mail@email.com" })
-}
-else
-{
-                        @Html.TextBoxFor(model => model.Email, new { @Value = Session["mail"] })
-}
+                                    {
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder =             "mail@email.com" })
+                                    }
+                                    else
+                                    {
+                                       @Html.TextBoxFor(model => model.Email, new { @Value = Session["mail"] })
+                                    }
                                 </div>
                             </div>
                             <div class="control-group">
@@ -153,16 +153,6 @@ else
                                     @Html.TextBoxFor(model => model.Adres, new { @class = "form-control", placeholder = "" })
                                 </div>
                             </div>
-                            @*<div class="control-group">
-                                <label class="control-label">Cinsiyet <sup>*</sup></label>
-                                <div class="controls">
-                                    <select class="span1" name="days">
-                                        <option value="">-</option>
-                                        <option value="1">Kadın</option>
-                                        <option value="2">Erkek</option>
-                                    </select>
-                                </div>
-                            </div>*@
                             <p><sup>*</sup>Required field	</p>
                             <div class="control-group">
                                 <div class="controls">

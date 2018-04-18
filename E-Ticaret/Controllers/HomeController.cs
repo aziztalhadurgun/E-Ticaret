@@ -38,22 +38,42 @@ namespace E_Ticaret.Controllers
         {
             DatabaseContext db = new DatabaseContext();
             db.Database.CreateIfNotExists();
-            List<Kategoriler> login = db.Kategorilers.ToList();
-            Kategoriler log = new Kategoriler();
+            List<Uye> login = db.Uyes.ToList();
+            Uye log = new Uye();
 
             return View(log);
         }
         [HttpPost]
-        public ActionResult Login(string text)
+        public ActionResult Login(Uye model)
         {
             DatabaseContext db = new DatabaseContext();
-            //List<Login> login = db.Logins.ToList();
-            //Login log = new Login();
+            List<Uye> login = db.Uyes.ToList();
+            // yeni hesap için mail kontrolü
+            Uye log2 = new Uye();
+            log2 = login.Find(x => x.Email == model.Email);
+            if (log2 != null)
+            {
+                ModelState.AddModelError("","Bu kullanıcı adı kullanılıyor.");
+                return View("Login");
+            }
 
-            Session["ad"] = text;
 
-            //log = login.Find(x => x.KullaniciAdi == mail && x.Sifre == pass);
-            return View();
+            // login kısmı için 
+            Uye log = new Uye();
+            log = login.Find(x => x.Email == model.Email && x.Sifre == model.Sifre);
+            if (log != null)
+            {
+                Session["ad"] = log.Adi; // bilgiler doğru ise login gerçekleşir ve Session'a kullanıcı adı atılır.
+            }
+            if (log != null)
+            {
+                return View("Index");
+
+            }
+            else
+            {
+                return View("Login");
+            }            
         }
         public ActionResult Normal()
         {
@@ -86,7 +106,7 @@ namespace E_Ticaret.Controllers
             if (uye1 != null)
             {
                 ModelState.AddModelError("mail", "Bu mail zaten kayıtlı");
-                return View("Login");
+                return View("Register");
             }
             else
             {
@@ -112,11 +132,6 @@ namespace E_Ticaret.Controllers
 
                         return View("Login");
                         }
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("mail", "Bu mail zaten kayıtlı");
-                        return View("Login");
                     }
                 }
             }

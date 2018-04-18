@@ -1,5 +1,5 @@
 ﻿@using E_Ticaret.Models
-@model Kategoriler
+@model Uye
 @{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -92,55 +92,62 @@
                 <hr class="soft" />
 
                 <div class="row">
-                    <div class="span4">
-                        <div class="well">
-                            <h5>CREATE YOUR ACCOUNT</h5><br />
-                            Enter your e-mail address to create an account.<br /><br /><br />
-                            <form action="~/Home/Register">
-                                <div class="control-group">
-                                    <label class="control-label" for="inputEmail0">E-mail address</label>
-                                    <div class="controls">
-                                        <input class="span3" type="text" id="inputEmail0" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="controls">
-                                    <button type="submit" class="btn block">Create Your Account</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="span1"> &nbsp;</div>
-                    <div class="span4">
-                        <div class="well">
-                            <h5>ALREADY REGISTERED ?</h5>
-                            
-                        @using (Html.BeginForm())
-                        {
-
-
-                            <div class="control-group">
-                                <label class="control-label" for="inputEmail1">Email</label>
-                                <div class="controls">
-                                    @*<input class="span3" type="text" id="inputEmail1" placeholder="Email">*@
-                                    @Html.TextBox("text")
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label" for="inputPassword1">Password</label>
-                                <div class="controls">
-                                    <input type="password" class="span3" id="inputPassword1" placeholder="Password">
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <button type="submit" class="btn">Sign in</button> <a href="~/forgetpass.html">Forget password?</a>
-                                </div>
-                            </div>
+                    @using (Html.BeginForm())
+                    {
                         
-                        }
-
+                        <div class="span4">
+                            <div class="well">
+                                <h5>CREATE YOUR ACCOUNT</h5><br />
+                                @Html.ValidationSummary(false)
+                                Enter your e-mail address to create an account.<br /><br /><br />
+                                <form action="~/Home/Register">
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputEmail0">E-mail address</label>
+                                        <div class="controls">
+                                            @*<input class="span3" type="text" id="inputEmail0" placeholder="Email">*@
+                                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Şifre" })
+                                        </div>
+                                    </div>
+                                    <div class="controls">
+                                        <button type="submit" class="btn block">Create Your Account</button>
+                                    </div>
+                                </form>
                             </div>
+                        </div>
+                    }
+                <div class="span1"> &nbsp;</div>
+                <div class="span4">
+                    <div class="well">
+                        <h5>ALREADY REGISTERED ?</h5>
+
+                        @using (Html.BeginForm())
+        {
+
+
+                <div class="control-group">
+                    <label class="control-label" for="inputEmail1">Email</label>
+                    <div class="controls">
+                        @*<input class="span3" type="text" id="inputEmail1" placeholder="Email">*@
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Şifre" })
                     </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="inputPassword1">Password</label>
+                    <div class="controls">
+                        @*<input type="password" class="span3" id="inputPassword1" placeholder="Password">*@
+                        @Html.TextBoxFor(model => model.Sifre, new { @class = "form-control", placeholder = "Şifre" })
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn">Sign in</button> <a href="~/forgetpass.html">Forget password?</a>
+                    </div>
+                </div>
+
+}
+
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
