@@ -15,21 +15,21 @@ namespace E_Ticaret.Models
         public int Id { get; set; }
 
         [DisplayName("İsim"),
-            StringLength(25)]
+            StringLength(25),Required(ErrorMessage ="Lütfen {0} giriniz.")]
         public string Adi { get; set; }
 
-        [DisplayName("İsim"),
-           StringLength(25)]
+        [DisplayName("Soy isim"),
+           StringLength(25),Required(ErrorMessage = "Lütfen {0} giriniz.")]
         public string Soyadi { get; set; }
 
-        [DisplayName("İsim"),
-            StringLength(25), Required(ErrorMessage = "E mail kullanılıyor")]
+        [DisplayName("E-mail"),
+            StringLength(25), Required(ErrorMessage = "Lütfen E-mail adresinizi giriniz.")]
         public string Email { get; set; }
 
-        [DisplayName("İsim")]
+        [DisplayName("Şifre"), Required(ErrorMessage = "Lütfen {0} giriniz.")]
         public string Sifre { get; set; }
 
-        [DisplayName("İsim")]
+        [DisplayName("Şifre Tekrar"),Compare("Sifre"), Required(ErrorMessage = "Lütfen {0} giriniz.")]
         public string SifreTekrar { get; set; }
 
 
@@ -38,13 +38,13 @@ namespace E_Ticaret.Models
 
         public int TelefonNo { get; set; }
 
-        [DisplayName("İsim")]
+        [DisplayName("Cinsiyet"), Required(ErrorMessage = "Lütfen {0} giriniz.")]
         public string Cinsiyet { get; set; }
 
-
+        [DisplayName("Doğum Tarihi"), Required(ErrorMessage = "Lütfen {0} giriniz.")]
         public DateTime DogumTarihi { get; set; }
 
-        [DisplayName("İsim")]
+        [DisplayName("Adres"), Required(ErrorMessage = "Lütfen {0} giriniz.")]
         public string Adres { get; set; }
 
         public virtual List<Yetki> YetkiId { get; set; }

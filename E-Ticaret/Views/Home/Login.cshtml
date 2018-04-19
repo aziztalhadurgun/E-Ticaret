@@ -92,13 +92,13 @@
                 <hr class="soft" />
 
                 <div class="row">
-                    @using (Html.BeginForm())
+                    @using (Html.BeginForm("Register","Home"))
                     {
                         
                         <div class="span4">
                             <div class="well">
                                 <h5>CREATE YOUR ACCOUNT</h5><br />
-                                @Html.ValidationSummary(false)
+                                @Html.ValidationSummary(false,"")
                                 Enter your e-mail address to create an account.<br /><br /><br />
                                 <form action="~/Home/Register">
                                     <div class="control-group">
@@ -106,6 +106,7 @@
                                         <div class="controls">
                                             @*<input class="span3" type="text" id="inputEmail0" placeholder="Email">*@
                                             @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Şifre" })
+                                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                     <div class="controls">
@@ -120,8 +121,8 @@
                     <div class="well">
                         <h5>ALREADY REGISTERED ?</h5>
 
-                        @using (Html.BeginForm())
-        {
+                        @using (Html.BeginForm("Login","Home"))
+                    {
 
 
                 <div class="control-group">

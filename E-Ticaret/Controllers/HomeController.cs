@@ -41,7 +41,7 @@ namespace E_Ticaret.Controllers
             List<Uye> login = db.Uyes.ToList();
             Uye log = new Uye();
 
-            return View(log);
+            return View();
         }
         [HttpPost]
         public ActionResult Login(Uye model)
@@ -51,11 +51,15 @@ namespace E_Ticaret.Controllers
             // yeni hesap için mail kontrolü
             Uye log2 = new Uye();
             log2 = login.Find(x => x.Email == model.Email);
-            if (log2 != null)
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError("","Bu kullanıcı adı kullanılıyor.");
-                return View("Login");
+                if (log2 != null)
+                {
+                    ModelState.AddModelError("","Bu kullanıcı adı kullanılıyor.");
+                    return View("Login", model);
+                }
             }
+            
 
 
             // login kısmı için 
@@ -105,7 +109,7 @@ namespace E_Ticaret.Controllers
             uye1 = Uye.Find(x => x.Email == model.Email);
             if (uye1 != null)
             {
-                ModelState.AddModelError("mail", "Bu mail zaten kayıtlı");
+                ModelState.AddModelError("Email","bu mail zaten kayıtlı");
                 return View("Register");
             }
             else
